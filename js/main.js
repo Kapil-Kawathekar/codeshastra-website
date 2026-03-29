@@ -1,5 +1,5 @@
 /* ============================================
-   CodeShastra — Interactive JavaScript
+   WebShastra — Interactive JavaScript
    Particles, tilt effects, scroll animations,
    custom cursor, and more
    ============================================ */
