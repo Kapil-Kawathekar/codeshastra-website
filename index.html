@@ -444,7 +444,11 @@
                         </a>
                     </div>
                 </div>
-                <form class="contact-form reveal-up" id="contactForm">
+                <form class="contact-form reveal-up" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="f3b7afb2-4ba9-4cce-ae74-38751b5f55e6">
+                    <input type="hidden" name="subject" value="New Contact Form Submission — WebShastra">
+                    <input type="hidden" name="from_name" value="WebShastra Contact Form">
+                    <input type="checkbox" name="botcheck" style="display: none;">
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder=" " required>

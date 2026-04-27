@@ -365,23 +365,43 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         btn.disabled = true;
 
-        // Simulate sending (replace with actual form submission)
-        setTimeout(() => {
-            btn.innerHTML = `
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                Message Sent!
-            `;
-            btn.style.background = '#059669';
+        const formData = new FormData(contactForm);
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Message Sent!
+                `;
+                btn.style.background = '#059669';
+                contactForm.reset();
+            } else {
+                btn.innerHTML = 'Failed to send. Try again.';
+                btn.style.background = '#dc2626';
+            }
 
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
                 btn.style.background = '';
-                contactForm.reset();
             }, 3000);
-        }, 1500);
+        })
+        .catch(() => {
+            btn.innerHTML = 'Failed to send. Try again.';
+            btn.style.background = '#dc2626';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.style.background = '';
+            }, 3000);
+        });
     });
 
     // ===========================
